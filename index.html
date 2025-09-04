@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search Box with Formspree</title>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo {
+      width: 200px;
+      margin-bottom: 30px;
+    }
+    form.search-box {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 550px;
+      border: 1px solid #dfe1e5;
+      border-radius: 24px;
+      padding: 10px 15px;
+      box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+    }
+    form.search-box input[type="text"] {
+      border: none;
+      outline: none;
+      font-size: 16px;
+      flex: 1;
+      padding: 8px;
+    }
+    form.search-box button {
+      background-color: #4285f4;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    form.search-box button:hover {
+      background-color: #357ae8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Replace with your own logo or remove if not needed -->
+  <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png" alt="Google Logo" class="logo" />
+
+  <form
+    class="search-box"
+    action="https://formspree.io/f/xeolpgvo"  <!-- Replace with your Formspree form URL -->
+    method="POST"
+  >
+    <input type="text" name="search" placeholder="Search Google or type a URL" required />
+    <button type="submit">Search</button>
+  </form>
+
+</body>
+</html>
