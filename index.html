@@ -5,65 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Search Box with Formspree</title>
   <style>
+    /* Simple clean Google-style search input */
     body {
-      background-color: #fff;
       font-family: Arial, sans-serif;
+      display: flex;
       height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-    }
-    .logo {
-      width: 200px;
-      margin-bottom: 30px;
-    }
-    form.search-box {
-      display: flex;
       align-items: center;
-      width: 100%;
-      max-width: 550px;
+      background: #f8f9fa;
+    }
+    form {
+      display: flex;
       border: 1px solid #dfe1e5;
       border-radius: 24px;
-      padding: 10px 15px;
-      box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+      padding: 10px 20px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 400px;
     }
-    form.search-box input[type="text"] {
+    input[type="text"] {
+      flex: 1;
       border: none;
       outline: none;
       font-size: 16px;
-      flex: 1;
-      padding: 8px;
     }
-    form.search-box button {
-      background-color: #4285f4;
+    button {
       border: none;
+      background-color: #4285f4;
       color: white;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 8px 16px;
       border-radius: 20px;
       cursor: pointer;
-      margin-left: 10px;
+      font-weight: bold;
     }
-    form.search-box button:hover {
+    button:hover {
       background-color: #357ae8;
     }
   </style>
 </head>
 <body>
 
-  <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png" alt="Google Logo" class="logo" />
+<form id="searchForm" action="https://formspree.io/f/xeolpgvo" method="POST" target="_blank">
+  <input type="text" name="searchQuery" placeholder="Search Google or type URL" required />
+  <button type="submit">Search</button>
+  <!-- Formspree requires a hidden input for email or can be anonymous -->
+</form>
 
-  <form
-    class="search-box"
-    action="https://formspree.io/f/xeolpgvo"  <!-- Replace yourformid with your Formspree form ID -->
-    method="POST"
-  >
-    <input type="hidden" name="_subject" value="New Search Query Received!" />
-    <input type="text" name="search_query" placeholder="Search Google or type a URL" required />
-    <button type="submit">Search</button>
-  </form>
+<script>
+  const form = document.getElementById('searchForm');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // prevent default form submission
+
+    const query = form.searchQuery.value.trim();
+    if (!query) return;
+
+    // Submit data to Formspree
+    fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json'
+      },
+      body: new FormData(form)
+    }).then(response => {
+      // After Formspree submission, redirect to Google search
+      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      window.open(googleSearchUrl, '_blank');
+    }).catch(error => {
+      // On error, still redirect
+      const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      window.open(googleSearchUrl, '_blank');
+    });
+  });
+</script>
 
 </body>
 </html>
+
